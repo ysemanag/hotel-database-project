@@ -143,6 +143,7 @@ In all the tables, the non-trivial functional dependencies hold because the tabl
 
 
 
+
 **Transaction and Query Executions **
 
 (All the queries below can also be found in a single SQL file named _sample-quieries.sql_)
@@ -166,6 +167,7 @@ SELECT *
 
 Intended result set:
 The intended result is a list of all reservations along with the corresponding customer name, phone number, address, reserved room building, bed number, price, and amenities, and payment details such as the payer, amount paid, and payment method.
+
 ![1](https://user-images.githubusercontent.com/111393266/234967137-2bcf8d6f-82e2-4a79-a8be-859d9f230b03.png)
 
 
@@ -197,6 +199,7 @@ SELECT o.order_id,
  
 Intended result set:
 The intended result is a list of all orders along with the corresponding product quantity and price, supplier ID, name, and product, and employee ID, name, designation, gender, and age.
+
 ![2](https://user-images.githubusercontent.com/111393266/234967492-c9772a6d-b735-4d38-be61-25c56aef2b5d.png)
 
 
@@ -239,6 +242,7 @@ SELECT c.cus_id,
   
 Intended result set:
 The intended result is a list of all such customers with a debt amount greater than 100 along with their corresponding reservation ID, reserved room building, bed number, price, and amenities, and employee details such as ID, name, designation, gender, and age.
+
 ![3](https://user-images.githubusercontent.com/111393266/234967862-8835c23b-50c6-40a2-a0f2-e355061f374e.png)
 
 
@@ -260,6 +264,7 @@ FROM Customers
      
 Intended result set:
 This query uses a LEFT OUTER JOIN to join the Customers and Orders tables. The result will include all customers, even those who haven't placed any orders yet. If a customer doesn't have any orders, the fields from the Orders table will be NULL.
+
 ![4](https://user-images.githubusercontent.com/111393266/234968057-bbcd2547-365f-463c-a188-117a36822ddf.png)
 
 
@@ -281,6 +286,7 @@ SELECT Inventory.product_id,
  
 Intended result set:
 This query uses a LEFT OUTER JOIN to join the Inventory and Supplier tables, and another LEFT OUTER JOIN to join the Orders table. The WHERE clause filters out products that have been ordered by customers, so the result will include all products that haven't been ordered yet. For those products, the fields from the Orders table will be NULL.
+
 ![5](https://user-images.githubusercontent.com/111393266/234968220-31bea7fe-ffd9-4491-b34f-e4d73b3241de.png)
 
 
@@ -301,6 +307,7 @@ SELECT Customers.cus_name,
  
 Intended result set:
 This query uses the SUM() aggregate function to calculate the total amount of all orders made by each customer. It then groups the results by customer name, so the output will include one row for each customer, with their name and the total amount of their orders.
+
 ![6](https://user-images.githubusercontent.com/111393266/234968356-0ce6d785-1280-49ac-b781-3bc2ddd1b1d4.png)
 
 
@@ -320,6 +327,7 @@ Query:
    
 Intended result set:
 This query uses the AVG() and SUM() aggregate functions to calculate the average price and total quantity of all products supplied by each supplier. It then groups the results by supplier name, so the output will include one row for each supplier, with their name, the average price of their products, and the total quantity of their products.
+
 ![7](https://user-images.githubusercontent.com/111393266/234968598-276cd2e1-8d5a-4287-a60c-9f8542aa7383.png)
 
 
@@ -344,6 +352,7 @@ SELECT cus_name
 
 Intended result set:
 This query uses a subquery to find all distinct customer IDs that appear in the Orders table or the Reservations table. It then selects the names of all customers whose IDs are in that list. The intended result is a list of customer names who have made at least one order or booked one room.
+
 ![8](https://user-images.githubusercontent.com/111393266/234968891-45554f0d-1bde-4e2d-94c1-f021826e405d.png)
 
 
@@ -363,6 +372,7 @@ SELECT product_id,
  
 Intended result set:
 This query uses a subquery to calculate the average price of all products in the Inventory table. It then selects the product IDs and their suppliers’ IDs of all products whose price is lower than that average. The intended result is a list of products with below-average prices.
+
 ![9](https://user-images.githubusercontent.com/111393266/234969109-960e4a78-8571-4d28-9bd0-8573852d0811.png)
 
 
@@ -386,6 +396,7 @@ SELECT cus_name
        
 Intended result set:
 This query uses two subqueries to find all distinct customer IDs that have made an order for a product with a quantity greater than 10. It then selects the names of all customers whose IDs are in that list. The intended result is a list of customer names who have made at least one order of a high-quantity product.
+
 ![10](https://user-images.githubusercontent.com/111393266/234969238-47c5a433-59cc-4d38-ae62-2af5a18e6360.png)
 
 
@@ -413,6 +424,7 @@ SELECT cus_name
        
 Intended result set:
 This query uses three subqueries to find all distinct customer IDs that have made an order for a product supplied by a supplier with the name 'Inkoko Inc.'. It then selects the names of all customers whose IDs are in that list. The intended result is a list of customer names who have made orders for products supplied by that particular supplier.
+
 ![11](https://user-images.githubusercontent.com/111393266/234969495-b4abfe2f-ce9f-45f7-81ba-9edb88e8e01f.png)
 
 
@@ -430,6 +442,7 @@ SELECT DISTINCT c1.cus_name
                
 Intended result set:
 This query uses a self-join to compare each customer's debt amount with the debt amount of all other customers. We join the Customers table with itself on the condition that the cus_id of one row is not equal to the cus_id of the other row, and the debt_amount of the first row is greater than the debt_amount of the second row. We then select only the distinct cus_name values from the first row. The intended result is a list of customer names with the highest debt amount in the table.
+
 ![12](https://user-images.githubusercontent.com/111393266/234969713-dd2f08cd-5eb9-420d-babe-6aab88d0af6f.png)
 
 
@@ -451,6 +464,7 @@ HAVING COUNT( * ) >= 3;
 
 Intended result set:
 This query first groups the reservations table by the customer ID, name, and counts the number of reservations for each customer. The HAVING clause filters the result to only include customers with at least 3 reservations. The output shows the customer ID and the total number of reservations for each qualifying customer.
+
 ![13](https://user-images.githubusercontent.com/111393266/234969844-dc0523b6-9795-487d-bc3f-04a5fe3e841c.png)
 
 
@@ -470,6 +484,7 @@ HAVING SUM(Inventory.quantity) > 500;
 
 Intended result set:
 This query joins the Inventory and Supplier tables on the supplier ID and groups the result by supplier ID. The HAVING clause filters the result to only include suppliers with a total quantity of products greater than 500. The output shows the supplier name and the average price of products for each qualifying supplier.
+
 ![14](https://user-images.githubusercontent.com/111393266/234969970-03301878-478e-4e6e-bcf6-3e9a933450eb.png)
 
 
@@ -486,6 +501,7 @@ SELECT payer_id, SUM(amount) AS total_amount_paid
  
 Intended result set:
 This query groups the Payments table by customer ID and sums up the amount paid by each customer. The HAVING clause filters the result to only include customers who have made at least one payment greater than $95. The output shows the customer ID and the total amount paid by each qualifying customer.
+
 ![15](https://user-images.githubusercontent.com/111393266/234970111-8dec4910-5360-4d10-8173-29bf6ee7dd32.png)
 
 
@@ -509,6 +525,7 @@ SELECT employee_id,
 
 Intended result set:
 This query uses the UNION ALL set operation to combine the results of two SELECT statements that have the same number and order of columns. The result set of this query is a combination of all rows from the two tables, including duplicates if any.
+
 ![16](https://user-images.githubusercontent.com/111393266/234970253-72f3629a-73c6-4f9e-b891-8152fb1d4c64.png)
 
 
@@ -527,6 +544,7 @@ SELECT product_id
 
 Intended result set:
 The result set of this query is a list of product ID values that are in both tables.
+
 ![17](https://user-images.githubusercontent.com/111393266/234970388-daa678b2-14be-4ef6-995b-fce94bd5833e.png)
 
 
