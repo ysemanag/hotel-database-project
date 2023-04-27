@@ -44,3 +44,98 @@ Reports: This entity will contain information about different reports generated 
 
 Entity-Relationship Diagram 
 
+![er-diagram](https://user-images.githubusercontent.com/111393266/234965340-92e852cc-ae83-4075-85ff-331f3faacdb2.jpeg)
+
+Relational Schema 
+ 
+Employees (employee_id, name, username, designation, gender, age, contract_start_date, contract_end_date,home_address )
+Orders (order_id, product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount)
+Inventory (product_id, quantity, price, supplier_id)
+Supplier (supplier_id, name, product_id, phone, address)
+Rooms (room_id, building, bed_number, availability, price, amenities)
+Reservations (reservation_id, reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date)
+Payments (payment_id, payer, amount, payment_method)
+Debtors (debt_id, cus_id, cus_name, cus_phone, cus_address, debt_amount, due_date)
+Customers (cus_id, cus_name, cus_phone, cus_address, comments, freq, debt_amount)
+Reports (report_id, report_info, report_date, reporter_id, reporter_name)
+
+
+Boyce–Codd Normal Form Decomposition 
+Assuming there are no transitive dependencies, here are the functional dependencies from my database with their candidate keys:
+
+1.	Employees (employee_id, name, username, gender, age, contract_start_date, contract_end_date, home_address)
+
+Non-trivial functional dependencies:
+employee_id -> name, username, gender, age, contract_start_date, contract_end_date, home_address
+username -> employee_id, name, gender, age, contract_start_date, contract_end_date, home_address
+
+Result: Yes, it is in BCNF. All the attributes on the right side of the dependency are fully dependent on the primary key (employee_id), and username is also a superkey (employees cannot share a username)
+
+2.	Orders (order_id, product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount)
+
+Non-trivial functional dependencies:
+order_id -> product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount
+
+Result: Yes, it is in BCNF because order_id is a super key. 
+
+3.	Inventory (product_id, quantity, price, supplier_id)
+
+Non-trivial functional dependencies:
+product_id -> quantity, price, supplier_id
+
+Result: Yes, it is in BCNF because product_id is a super key.
+
+4.	Supplier (supplier_id, supplier_name, supplier_phone, supplier_address)
+
+Non-trivial functional dependencies:
+supplier_id -> supplier_name, supplier_phone, supplier_address
+
+Result: Yes, it is in BCNF because supplier_id is a super key.
+
+5.	Rooms (room_id, building, bed_number, availability, price, amenities)
+
+Non-trivial functional dependencies:
+room_id -> building, bed_number, availability, price, amenities
+
+Result: Yes, it is in BCNF because room_id is a super key.
+
+6.	Reservations (reservation_id, reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date)
+
+Non-trivial functional dependencies:
+reservation_id -> reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date
+
+Result: Yes, it is in BCNF because reservation_id is a super key.
+
+7.	Payments (payment_id, payer, amount, payment_method)
+
+Non-trivial functional dependencies:
+payment_id -> payer, amount, payment_method
+
+Result: Yes, it is in BCNF because payment_id is a super key.
+
+8.	Debtors (debt_id, cus_id, cus_name, cus_phone, cus_address, debt_amount, due_date)
+
+Non-trivial functional dependencies:
+debt_id -> cus_id, cus_name, cus_phone, cus_address, debt_amount, due_date
+cus_id -> cus_name, cus_phone, cus_address, debt_amount, due_date
+
+Result: Yes, it is BCNF. All the attributes on the right side of the dependencies are fully dependent on the primary keys (debt_id and cus_id)
+
+9.	Customers (cus_id, cus_name, cus_phone, cus_address, comments, freq, debt_amount)
+
+Non-trivial functional dependencies:
+cus_id -> cus_name, cus_phone, cus_address, comments, freq, debt_amount
+
+Result: Yes, it is in BCNF because cus_id is a super key.
+
+10.	Reports (report_id, report_info, report_date, reporter_id, reporter_name)
+
+Non-trivial functional dependencies:
+report_id -> report_info, report_date, reporter_id, reporter_name
+
+Result: Yes, it is in BCNF because report_id is a super key.
+
+
+In all the tables, the non-trivial functional dependencies hold because the tables are designed in such a way that each attribute is fully dependent on the primary key of the table, and there are no non-trivial dependencies between non-key attributes.![image](https://user-images.githubusercontent.com/111393266/234965844-70c71cba-b745-4c5e-a483-6bc64805dbb3.png)
+
+
