@@ -142,7 +142,9 @@ Result: Yes, it is in BCNF because report_id is a super key.
 In all the tables, the non-trivial functional dependencies hold because the tables are designed in such a way that each attribute is fully dependent on the primary key of the table, and there are no non-trivial dependencies between non-key attributes.
 
 
+
 **Transaction and Query Executions **
+
 (All the queries below can also be found in a single SQL file named _sample-quieries.sql_)
 
 //At least two queries should involve four or more relations 
