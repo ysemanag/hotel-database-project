@@ -44,7 +44,7 @@ The Hotel Database will include several key entities, each of which will be rela
 
 # **Entity-Relationship Diagram**
 
-![er-diagram](https://user-images.githubusercontent.com/111393266/234965340-92e852cc-ae83-4075-85ff-331f3faacdb2.jpeg)
+![er-diagram](https://user-images.githubusercontent.com/111393266/235572843-10ede2e7-9532-4506-869e-58e17e8bfaa1.jpg)
 
 
 
