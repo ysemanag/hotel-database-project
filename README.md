@@ -65,7 +65,7 @@ The Hotel Database will include several key entities, each of which will be rela
 
 # **Boyce–Codd Normal Form Decomposition** 
 
-1.	Employees (***employee_id***, name, username, gender, age, contract_start_date, contract_end_date, street_address, city, state, country, zipcode)
+- Employees (***employee_id***, name, username, gender, age, contract_start_date, contract_end_date, street_address, city, state, country, zipcode)
 
 Non-trivial functional dependencies:
 employee_id -> name, username, gender, age, contract_start_date, contract_end_date, home_address
@@ -73,49 +73,49 @@ username -> employee_id, name, gender, age, contract_start_date, contract_end_da
 
 Result: Yes, it is in BCNF. All the attributes on the right side of the dependency are fully dependent on the primary key (employee_id), and username is also a superkey (employees cannot share a username)
 
-2.	Orders (***order_id***, product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount)
+- Orders (***order_id***, product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount)
 
 Non-trivial functional dependencies:
 order_id -> product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount
 
 Result: Yes, it is in BCNF because order_id is a super key. 
 
-3.	Inventory (***product_id***, product_name, quantity, price, supplier_id)
+- Inventory (***product_id***, product_name, quantity, price, supplier_id)
 
 Non-trivial functional dependencies:
 product_id -> quantity, price, supplier_id
 
 Result: Yes, it is in BCNF because product_id is a super key.
 
-4.	Supplier (***supplier_id***, supplier_name, supplier_phone, street_address, city, state, country, zipcode)
+- Supplier (***supplier_id***, supplier_name, supplier_phone, street_address, city, state, country, zipcode)
 
 Non-trivial functional dependencies:
 supplier_id -> supplier_name, supplier_phone, supplier_address
 
 Result: Yes, it is in BCNF because supplier_id is a super key.
 
-5.	Rooms (***room_id***, building, bed_number, availability, price, amenities)
+- Rooms (***room_id***, building, bed_number, availability, price, amenities)
 
 Non-trivial functional dependencies:
 room_id -> building, bed_number, availability, price, amenities
 
 Result: Yes, it is in BCNF because room_id is a super key.
 
-6.	Reservations (***reservation_id***, reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date)
+-	Reservations (***reservation_id***, reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date)
 
 Non-trivial functional dependencies:
 reservation_id -> reserved_room_id, availability, cus_id, cus_name, paid_amount, sign_in_date, sign_out_date
 
 Result: Yes, it is in BCNF because reservation_id is a super key.
 
-7.	Payments (***payment_id***, payer, amount, payment_method)
+- Payments (***payment_id***, payer, amount, payment_method)
 
 Non-trivial functional dependencies:
 payment_id -> payer, amount, payment_method
 
 Result: Yes, it is in BCNF because payment_id is a super key.
 
-8.	Debtors (***debt_id***, cus_id, cus_name, cus_phone, debt_amount, due_date)
+- Debtors (***debt_id***, cus_id, cus_name, cus_phone, debt_amount, due_date)
 
 Non-trivial functional dependencies:
 debt_id -> cus_id, cus_name, cus_phone, cus_address, debt_amount, due_date
@@ -123,14 +123,14 @@ cus_id -> cus_name, cus_phone, cus_address, debt_amount, due_date
 
 Result: Yes, it is BCNF. All the attributes on the right side of the dependencies are fully dependent on the primary keys (debt_id and cus_id)
 
-9.	Customers (***cus_id***, cus_name, cus_phone, comments, freq, debt_amount)
+- Customers (***cus_id***, cus_name, cus_phone, comments, freq, debt_amount)
 
 Non-trivial functional dependencies:
 cus_id -> cus_name, cus_phone, cus_address, comments, freq, debt_amount
 
 Result: Yes, it is in BCNF because cus_id is a super key.
 
-10.	Reports (***report_id***, report_info, report_date, reporter_id, reporter_name)
+- Reports (***report_id***, report_info, report_date, reporter_id, reporter_name)
 
 Non-trivial functional dependencies:
 report_id -> report_info, report_date, reporter_id, reporter_name
@@ -149,7 +149,7 @@ In all the tables, the non-trivial functional dependencies hold because the tabl
 
 //At least two queries should involve four or more relations 
 
-QUERY 1
+**QUERY 1**
 
 Query description: 
 Retrieve the details of all reservations along with the corresponding customer information, reserved room details, and payment information.
@@ -170,7 +170,7 @@ The intended result is a list of all reservations along with the corresponding c
 ![1](https://user-images.githubusercontent.com/111393266/234967137-2bcf8d6f-82e2-4a79-a8be-859d9f230b03.png)
 
 
-QUERY 2
+**QUERY 2**
 
 Query description: 
 Retrieve the list of all orders along with the product details, supplier information, and employee details involved in each order.
@@ -202,7 +202,7 @@ The intended result is a list of all orders along with the corresponding product
 ![2](https://user-images.githubusercontent.com/111393266/234967492-c9772a6d-b735-4d38-be61-25c56aef2b5d.png)
 
 
-QUERY 3
+**QUERY 3**
 
 Query description: 
 Retrieve the details of all customers who have a debt amount greater than or equal to $100, along with their corresponding reservations, reserved room details, and employee details.
@@ -247,7 +247,7 @@ The intended result is a list of all such customers with a debt amount greater t
 
 //At least one query should involve outer joins 
 
-QUERY 4
+**QUERY 4**
 
 Query description: 
 Retrieve a list of all customers and their associated orders, including customers who have not yet placed any orders.
@@ -267,7 +267,7 @@ This query uses a LEFT OUTER JOIN to join the Customers and Orders tables. The r
 ![4](https://user-images.githubusercontent.com/111393266/234968057-bbcd2547-365f-463c-a188-117a36822ddf.png)
 
 
-QUERY 5
+**QUERY 5**
 
 Query description: 
 Retrieve a list of products that have not yet been ordered by any customers, their current inventory levels, and their suppliers.
@@ -291,7 +291,7 @@ This query uses a LEFT OUTER JOIN to join the Inventory and Supplier tables, and
 
 //At least one query should use an aggregate function 
 
-QUERY 6
+**QUERY 6**
 
 Query description: 
 Retrieve the total amount of all orders made by each customer.
@@ -310,7 +310,7 @@ This query uses the SUM() aggregate function to calculate the total amount of al
 ![6](https://user-images.githubusercontent.com/111393266/234968356-0ce6d785-1280-49ac-b781-3bc2ddd1b1d4.png)
 
 
-QUERY 7
+**QUERY 7**
 
 Query description: 
 Retrieve the average price and total quantity of all products supplied by each supplier.
@@ -333,7 +333,7 @@ This query uses the AVG() and SUM() aggregate functions to calculate the average
 //At least three queries should use subqueries in a non-trivial way
 -	//One of those should use a set comparison (e.g. > some ) 
 
-QUERY 8
+**QUERY 8**
 
 Query description: 
 Retrieve the names of all customers who have made at least one order or have booked a room at least once.
@@ -355,7 +355,7 @@ This query uses a subquery to find all distinct customer IDs that appear in the 
 ![8](https://user-images.githubusercontent.com/111393266/234968891-45554f0d-1bde-4e2d-94c1-f021826e405d.png)
 
 
-QUERY 9
+**QUERY 9**
 
 Query description: 
 Retrieve the product IDs and their suppliers' IDs of all products that have a lower price than the average price of all products.
@@ -375,7 +375,7 @@ This query uses a subquery to calculate the average price of all products in the
 ![9](https://user-images.githubusercontent.com/111393266/234969109-960e4a78-8571-4d28-9bd0-8573852d0811.png)
 
 
-QUERY 10
+**QUERY 10**
 
 Query description: 
 Retrieve the names of all customers who have made at least one order of a product with a quantity greater than 10.
@@ -399,7 +399,7 @@ This query uses two subqueries to find all distinct customer IDs that have made 
 ![10](https://user-images.githubusercontent.com/111393266/234969238-47c5a433-59cc-4d38-ae62-2af5a18e6360.png)
 
 
-QUERY 11
+**QUERY 11**
 
 Query description: 
 Retrieve the names of all customers who have made orders for products supplied by a supplier with the name ‘Inkoko Inc.’.
@@ -427,7 +427,7 @@ This query uses three subqueries to find all distinct customer IDs that have mad
 ![11](https://user-images.githubusercontent.com/111393266/234969495-b4abfe2f-ce9f-45f7-81ba-9edb88e8e01f.png)
 
 
-QUERY 12
+**QUERY 12**
 
 Query description: 
 Retrieve the names of all customers who have a debt amount greater than the maximum debt amount of any other customer using a self-join.
@@ -448,7 +448,7 @@ This query uses a self-join to compare each customer's debt amount with the debt
 //At least two queries should use grouping 
 -	//At least one of those should use having 
 
-QUERY 13
+**QUERY 13**
 
 Query description:
 List the total number of reservations made by each customer who has made at least 3 reservations.
@@ -467,7 +467,7 @@ This query first groups the reservations table by the customer ID, name, and cou
 ![13](https://user-images.githubusercontent.com/111393266/234969844-dc0523b6-9795-487d-bc3f-04a5fe3e841c.png)
 
 
-QUERY 14
+**QUERY 14**
 
 Query description:
 Find the average price of products for each supplier whose total quantity of products is greater than 500.
@@ -487,7 +487,7 @@ This query joins the Inventory and Supplier tables on the supplier ID and groups
 ![14](https://user-images.githubusercontent.com/111393266/234969970-03301878-478e-4e6e-bcf6-3e9a933450eb.png)
 
 
-QUERY 15
+**QUERY 15**
 
 Query description:
 List the total amount paid by each customer who has at least one payment greater than $95.
@@ -506,7 +506,7 @@ This query groups the Payments table by customer ID and sums up the amount paid 
 
 //At least one query should use set operations
 
-QUERY 16
+**QUERY 16**
 
 Query description:
 Retrieves the employee ID, name and table name that have the same number and order of columns.
@@ -528,7 +528,7 @@ This query uses the UNION ALL set operation to combine the results of two SELECT
 ![16](https://user-images.githubusercontent.com/111393266/234970253-72f3629a-73c6-4f9e-b891-8152fb1d4c64.png)
 
 
-QUERY 17
+**QUERY 17**
 
 Query description:
 Finds the product ID values that are both in the Inventory table with a quantity greater than 0 and in the Orders table using INTERSECT set operation.
