@@ -30,7 +30,7 @@ The Hotel Database will include several key entities, each of which will be rela
 
 - Rooms: This entity will contain information about the room services of the hotel, including the room number, price, location, number of people, amenities, availability status, and more. Each room will have a unique room number to ensure no double-booking issues of the rooms.
 
-- Reservations: This entity will act as the orders entity but for the rooms. It will contain information about the bookings of the rooms such as reservation id, room information, customer information, sign-in and sign-out dates, and more. Every reservation will be assigned a unique reservation id. The room can only be reserved if it’s availability condition is true.
+- Reservations: This entity will act as the orders entity but for the rooms. It will contain information about the bookings of the rooms such as reservation id, room information, customer information, sign-in and sign-out dates, and more. Every reservation will be assigned a unique reservation id. The room can only be reserved if it’s availability condition is true. The reservation_id will be used to identify a specific reservation and not the room_id since a customer can book more than one rooms at once.
 
 - Payments: This entity will hold details about the customer’s payment method, amount, payment history, whether paid or debt and outstanding balances. This entity will be referenced with the unique order numbers to make sure we can identify where every amount has originated.
 
@@ -38,7 +38,7 @@ The Hotel Database will include several key entities, each of which will be rela
 
 - Customers: This entity will contain information about the customers for this hotel such as the customer names, phone numbers, addresses, money owed to the hotel (if any) and more. This relationship will allow the database to store and track who are the hotel’s customers and link them to their order information. This data will also be used to analyze what are the hotel’s most frequent customers, orders, etc.
 
-- Reports: This entity will contain information about different reports generated automatically or manually for different causes, including report id, report information, and reporting employee’s information such as the employee id and name. It will use a unique report id to be able to identify every report individually.
+- Reports: This entity will contain information about different reports generated automatically or manually for different causes, including report id, report information, and reporting employee’s information such as the employee id and name. It will use a unique report id to be able to identify every report individually. The report_info should be a brief summary of the report details.
  
 
 
@@ -50,7 +50,7 @@ The Hotel Database will include several key entities, each of which will be rela
 
 # **Relational Schema**
  
-- Employees (***employee_id***, name, username, designation, gender, age, contract_start_date, contract_end_date,street_address, city, state, country, zipcode )
+- Employees (***employee_id***, name, username, designation, gender, age, contract_start_date, contract_end_date, street_address, city, state, country, zipcode )
 - Orders (***order_id***, product_id, employee_id, cus_id, cus_name, cus_phone, duration, amount)
 - Inventory (***product_id***, product_name, quantity, price, supplier_id)
 - Supplier (***supplier_id***, name, product_id, phone, street_address, city, state, country, zipcode)
